@@ -1,43 +1,38 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-
     isLoading: false,
     data: null,
     error: null,
     listdata: []
-}
+};
 
 const createjobslice = createSlice({
-    name: "job ",
+    name: "job",
     initialState,
     reducers: {
-
         createjobRequest: function (state, { payload }) {
             state.isLoading = true;
-            state.data = payload
+            state.data = payload;
         },
         createjobSuc: function (state, { payload }) {
             state.isLoading = false;
         },
         createjobFail: function (state, { payload }) {
             state.isLoading = false;
-            state.error = payload
+            state.error = payload;
         },
         getjobRequest: function (state, { payload }) {
             state.isLoading = true;
-
         },
         SucgetjobRequest: function (state, { payload }) {
-            state.isLoading = true;
-            state.listdata = payload
+            state.isLoading = false;
+            state.listdata = payload.listdata;
         },
         FailgetjobRequest: function (state, { payload }) {
             state.isLoading = false;
-            state.error = payload
-        },
-
-
+            state.error = payload;
+        }
     }
 });
 
@@ -47,6 +42,7 @@ export const {
     createjobFail,
     getjobRequest,
     SucgetjobRequest,
-    FailgetjobRequest } = createjobslice.actions
+    FailgetjobRequest
+} = createjobslice.actions;
 
-export default createjobslice.reducer
+export default createjobslice.reducer;

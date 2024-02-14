@@ -1,43 +1,29 @@
-import { takeEvery, call } from 'redux-saga/effects';
-
-import {
-    createjobFail,
-    createjobSuc,
-    createjobRequest,
-    getjobRequest,
-    SucgetjobRequest,
-    failgetJobRequest
-} from 'slice/recruiter/createjobslice';
-
+import { takeEvery, call, put } from 'redux-saga/effects';
+import { createjobFail, createjobSuc, createjobRequest, getjobRequest, SucgetjobRequest, FailgetjobRequest } from 'slice/recruiter/createjobslice';
 import { createjobData, getJobData } from 'service/recruiter/recruiterjob';
 
-function createjob(action) {
+function* createjob(action) {
     try {
-        let mydata = call(createjobData, action.payload)
-        yield createjobSuc(mydata)
-    }
-    catch {
-        yield createjobFail(mydata)
-
+        const mydata = yield call(createjobData, action.payload);
+        yield put(createjobSuc(mydata)); // Assuming createjobSuc is an action creator
+    } catch (error) {
+        yield put(createjobFail(error));
     }
 }
 
-
-
-export function watchcreatejob() {
-    return yield takeEvery(createjobRequest, createjob)
+export function* watchcreatejob() {
+    yield takeEvery(createjobRequest, createjob);
 }
 
-function getjob(action) {
+function* getjob(action) {
     try {
-        let mydata = yield call(getJobData, action.payload);
-
-        yield SucgetjobRequest(mydata);
-    } catch {
-        yield failgetJobRequest(mydata);
+        const mydata = yield call(getJobData, action.payload);
+        yield put(SucgetjobRequest(mydata)); // Assuming SucgetjobRequest is an action creator
+    } catch (error) {
+        yield put(FailgetjobRequest(error));
     }
 }
 
-export function watchgetjob() {
-    return yield takeEvery(getjobRequest, getjob);
-} 
+export function* watchgetjob() {
+    yield takeEvery(getjobRequest, getjob);
+}

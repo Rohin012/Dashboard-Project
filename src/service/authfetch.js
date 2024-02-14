@@ -6,7 +6,7 @@ const authFetch = (url, method, body) => {
 
     return fetch(baseUrl + url, {
         method: method,
-        header: {
+        headers: {
             'Content-Type': 'application/json',
             Authorization: 'Bearer' + token
         },

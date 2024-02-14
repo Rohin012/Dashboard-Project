@@ -1,10 +1,12 @@
 import { Button, Grid, MenuItem, Paper, TextField } from '@mui/material'
+import axios from 'axios';
 
 import React from 'react'
 import { useState } from 'react';
 import { Stack } from '@mui/material';
 import { Box, styled } from '@mui/material';
 import { Breadcrumb } from 'app/components';
+import createjobData from 'service/recruiter/recruiterjob';
 
 const Container = styled('div')(({ theme }) => ({
   margin: '30px',
@@ -37,6 +39,12 @@ export default function CreateJob() {
     });
   };
 
+  const [setPopup] = useState();
+
+  const handleUpdate = () => {
+    console.log(jobDetails);
+
+  };
   return (
     <Container>
       <div>
@@ -178,7 +186,7 @@ export default function CreateJob() {
                   variant="contained"
                   color="primary"
                   style={{ padding: "10px 50px", marginTop: "30px" }}
-
+                  onClick={handleUpdate} // Add onClick event
                 >
                   Create Job
                 </Button>

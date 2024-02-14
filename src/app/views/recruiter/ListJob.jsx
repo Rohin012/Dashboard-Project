@@ -8,7 +8,7 @@ import { getjobRequest } from 'slice/recruiter/createjobslice';
 
 export default function ListJob() {
 
-    const { data, isloading, error, listdata } = useSelector((y) => y.jobs)
+    const { data, isLoading, error, listdata } = useSelector((y) => y.jobs)
 
     console.log(listdata);
     const dis = useDispatch();
@@ -25,8 +25,8 @@ export default function ListJob() {
                         <Breadcrumb routeSegments={[{ name: 'ListJob', path: '/Recruiter' }, { name: 'ListJob' }]} />
                     </Box>
 
-                    {isloading && <div>Loading</div>}
-                    {error && <div>{error}</div>}
+                    {isLoading && <div>Loading</div>}
+                    {error && <div>{error.message}</div>}
 
                     {data && (
                         <ul className='col-sm-4'>
